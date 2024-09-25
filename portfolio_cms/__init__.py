@@ -30,4 +30,4 @@ DB_UNAME = os.environ.get("DB_UNAME", "")
 DB_PWORD = os.environ.get("DB_PWORD", "")
 SECRET_KEY = create_secret_key()
 DEBUG = os.environ.get("DEBUG", False)
-
+PRODUCTION_SERVER = "portfolio-cms-jqgh.onrender.com"
