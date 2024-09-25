@@ -33,6 +33,8 @@ DB_PWORD = os.environ.get("DB_PWORD", "")
 SECRET_KEY = create_secret_key()
 DEBUG = os.environ.get("DEBUG", False)
 PRODUCTION_SERVER = "https://portfolio-cms-jqgh.onrender.com"
+ALLOWED_HOSTS = ["portfolio-cms-jqgh.onrender.com", "localhost", "127.0.0.1"]
+TRUSTED_ORIGINS = [PRODUCTION_SERVER]
 SPECTACULAR_CONFIG = {
     "TITLE": "Portfolio CMS API",
     "DESCRIPTION": """

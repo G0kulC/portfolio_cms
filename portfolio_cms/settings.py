@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 
-from portfolio_cms import SECRET_KEY, DEBUG,PRODUCTION_SERVER, SPECTACULAR_CONFIG
+from portfolio_cms import SECRET_KEY, DEBUG,ALLOWED_HOSTS, SPECTACULAR_CONFIG,TRUSTED_ORIGINS
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +28,7 @@ SECRET_KEY = SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = DEBUG
 
-ALLOWED_HOSTS = [PRODUCTION_SERVER, "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ALLOWED_HOSTS
 
 
 # Application definition
@@ -85,8 +85,12 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
 ]
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
-CSRF_TRUSTED_ORIGINS = [PRODUCTION_SERVER]
+# CORS settings
+CORS_ALLOWED_ORIGINS = TRUSTED_ORIGINS
+
+# CSRF settings
+CSRF_TRUSTED_ORIGINS = TRUSTED_ORIGINS
+
 
 ROOT_URLCONF = "portfolio_cms.urls"
 
