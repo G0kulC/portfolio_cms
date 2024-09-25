@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 
-from portfolio_cms import SECRET_KEY, DEBUG,PRODUCTION_SERVER
+from portfolio_cms import SECRET_KEY, DEBUG,PRODUCTION_SERVER, SPECTACULAR_CONFIG
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -67,64 +67,7 @@ STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 
-SPECTACULAR_SETTINGS = {
-    'TITLE': 'Portfolio CMS API',
-    'DESCRIPTION': '''
-    Portfolio CMS API Documentation
-
-    Welcome to the **Portfolio CMS API** documentation. This API allows you to manage user portfolios, including creating, updating, and deleting portfolio items.
-
-    Key Features
-
-    - **User Authentication**: Secure your API with JWT authentication.
-    - **Portfolio Management**: CRUD operations for user portfolios.
-    - **Learn Purpose Only**: This API is intended for educational purposes.
-
-    ''',
-    'VERSION': '1.0.0',
-    'SERVE_INCLUDE_SCHEMA': False,
-    'CONTACT': {
-        'name': 'Gokul C',
-        'email': 'gggokul865@gmail.com',
-        'url': 'https://gokuldev.netlify.app',
-    },
-    'LICENSE': {
-        'name': 'MIT License',
-        'url': 'https://opensource.org/licenses/MIT',
-    },
-    'TERMS_OF_SERVICE': 'https://www.google.com/policies/terms/',
-    'SERVERS': [
-        {'url': PRODUCTION_SERVER, 'description': 'Production Server'},
-        # {'url': 'http://localhost:8000', 'description': 'Local Development Server'},
-    ],
-    'SCHEMA_PATH_PREFIX': r'/api/',
-    'SWAGGER_UI_SETTINGS': {
-        'deepLinking': True,
-        'defaultModelRendering': 'model',
-        'displayRequestDuration': True,
-    },
-    'SWAGGER_UI_DIST': '//unpkg.com/swagger-ui-dist@3.52.5',
-    'SWAGGER_UI_FAVICON_HREF': '/static/images/favicon.ico',
-    'REDOC_UI_SETTINGS': {
-        'hideDownloadButton': True,
-    },
-    'PREPROCESSING_HOOKS': [],
-    'POSTPROCESSING_HOOKS': [],
-    'ENUM_NAME_OVERRIDES': {},
-    'SORT_OPERATION_PARAMETERS': True,
-    'COMPONENT_SPLIT_REQUEST': True,
-    'SERVE_PERMISSIONS': ['rest_framework.permissions.AllowAny'],
-    'SECURITY': [
-        {'BearerAuth': ["Authorization"]},
-    ],
-    'SECURITY_SCHEMES': {
-        'BearerAuth': {
-            'type': 'http',
-            'scheme': 'bearer',
-            'bearerFormat': 'JWT',
-        },
-    },
-}
+SPECTACULAR_SETTINGS = SPECTACULAR_CONFIG
 
 # SimpleJWT Settings
 SIMPLE_JWT = {
@@ -143,7 +86,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
-
+CSRF_TRUSTED_ORIGINS = [PRODUCTION_SERVER]
 
 ROOT_URLCONF = "portfolio_cms.urls"
 
