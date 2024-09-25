@@ -1,18 +1,23 @@
 #!/bin/bash
 
-# Set default values if environment variables are not provided
-SUPERUSER_USERNAME=${DJANGO_SUPERUSER_USERNAME:-gokul@djnago}
-SUPERUSER_EMAIL=${DJANGO_SUPERUSER_EMAIL:-gokul@djnago.com.in}
-SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD:-Admin@123}
+# Ensure that superuser credentials are provided
+if [ -z "$DJANGO_SUPERUSER_USERNAME" ] || [ -z "$DJANGO_SUPERUSER_EMAIL" ] || [ -z "$DJANGO_SUPERUSER_PASSWORD" ]; then
+    echo "Superuser credentials not provided."
+    exit 1
+fi
 
-# Check if the superuser exists, if not, create it
+# Use a Python one-liner to check and create the superuser
 python manage.py shell << END
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
-if not User.objects.filter(username='$SUPERUSER_USERNAME').exists():
-    User.objects.create_superuser(username='$SUPERUSER_USERNAME', email='$SUPERUSER_EMAIL', password='$SUPERUSER_PASSWORD')
-    print("Superuser created with username: $SUPERUSER_USERNAME")
+username = "$DJANGO_SUPERUSER_USERNAME"
+email = "$DJANGO_SUPERUSER_EMAIL"
+password = "$DJANGO_SUPERUSER_PASSWORD"
+
+if not User.objects.filter(username=username).exists():
+    User.objects.create_superuser(username=username, email=email, password=password)
+    print(f"Superuser created with username: {username}")
 else:
-    print("Superuser with username $SUPERUSER_USERNAME already exists.")
+    print(f"Superuser with username {username} already exists.")
 END

@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 
-from portfolio_cms import DB_HOST, DB_NAME, DB_PWORD, DB_PORT, DB_UNAME, SECRET_KEY, DEBUG
+from portfolio_cms import SECRET_KEY, DEBUG
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -81,10 +81,7 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # React local development server
-    # Add production domains here
-]
+CORS_ALLOWED_ORIGINS = ["*"]
 
 
 ROOT_URLCONF = "portfolio_cms.urls"
@@ -111,23 +108,23 @@ WSGI_APPLICATION = "portfolio_cms.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': DB_NAME,                      
-        'USER': DB_UNAME,
-        'PASSWORD': DB_PWORD,
-        'HOST': DB_HOST,
-        'PORT': DB_PORT,
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': DB_NAME,                      
+#         'USER': DB_UNAME,
+#         'PASSWORD': DB_PWORD,
+#         'HOST': DB_HOST,
+#         'PORT': DB_PORT,
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
