@@ -17,11 +17,17 @@ if os.path.exists(ENV_FILE):
 else:
     logger.info("No %s.env file found. Relying on system env", ENV_NAME)
 
+
+def create_secret_key():
+    from django.core.management.utils import get_random_secret_key
+    logger.info("Creating secret key...")
+    return get_random_secret_key()
+
 DB_HOST = os.environ.get("DB_HOST", "")
 DB_PORT = os.environ.get("DB_PORT", 5432)
 DB_NAME = os.environ.get("DB_NAME", "")
 DB_UNAME = os.environ.get("DB_UNAME", "")
 DB_PWORD = os.environ.get("DB_PWORD", "")
-SECRET_KEY = os.environ.get("SECRET_KEY", "")
+SECRET_KEY = create_secret_key()
 DEBUG = os.environ.get("DEBUG", False)
 
