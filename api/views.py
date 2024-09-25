@@ -5,7 +5,7 @@ from .models import (
     Contact, SocialLink, Testimonial, Template
 )
 from .serializers import (
-    UserSerializer, PortfolioSerializer, ProjectSerializer, SkillSerializer, 
+    CustomUserSerializer, PortfolioSerializer, ProjectSerializer, SkillSerializer, 
     ExperienceSerializer, EducationSerializer, ContactSerializer, SocialLinkSerializer, 
     TestimonialSerializer, TemplateSerializer
 )
@@ -15,7 +15,7 @@ User = get_user_model()
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = CustomUserSerializer
 
     def get_queryset(self):
         # Check if user is staff or superuser, and if not, filter out soft-deleted users
